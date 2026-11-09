@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>روزشمار تا نوروز ۱۴۰۶</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--text:#1d1d1f;--muted:#6b6b72;--accent:#e8590c;--done:#2f9e44;--line:#e4e1d8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17171a;--card:#222227;--text:#f1f1f3;--muted:#9a9aa3;--accent:#ff8a4c;--done:#51cf66;--line:#33333a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#05060f;--card:#141a3d;--text:#f1f3ff;--muted:#a5acd6;--accent:#ff8a4c;--done:#51cf66;--line:#2a3166;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--text);font-family:"Vazirmatn",Tahoma,sans-serif;padding:20px 16px 40px;background-color:#05060f;background-image:radial-gradient(700px 500px at 85% 0%,rgba(124,58,237,.38),transparent),radial-gradient(800px 600px at 5% 40%,rgba(14,116,144,.32),transparent),radial-gradient(700px 500px at 95% 95%,rgba(219,39,119,.28),transparent),linear-gradient(180deg,#05060f,#0b1030 60%,#120a2e);background-attachment:fixed}
+body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;animation:tw 4s ease-in-out infinite alternate}
+body::before{background-image:radial-gradient(1.2px 1.2px at 20px 30px,#fff,transparent),radial-gradient(1px 1px at 90px 120px,#fff,transparent),radial-gradient(1.6px 1.6px at 150px 60px,#ffe9a8,transparent),radial-gradient(1px 1px at 200px 190px,#bcd4ff,transparent),radial-gradient(1.4px 1.4px at 260px 100px,#fff,transparent);background-size:300px 220px}
+body::after{background-image:radial-gradient(1.5px 1.5px at 60px 80px,#fff,transparent),radial-gradient(1px 1px at 170px 200px,#ffd6e8,transparent),radial-gradient(1.3px 1.3px at 330px 40px,#fff,transparent),radial-gradient(1px 1px at 400px 260px,#bcd4ff,transparent);background-size:470px 350px;animation-delay:-2s}
+@keyframes tw{from{opacity:.45}to{opacity:1}}
+.wrap{position:relative;z-index:1}
+.wrap{max-width:900px;margin:0 auto}
+h1{font-size:1.9rem;font-weight:800;margin:0 0 4px;background:linear-gradient(90deg,var(--accent),#f59f00,#ae3ec9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:0 0 16px}
+.bar{height:12px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 14px;flex:1;min-width:120px}
+.stat b{display:block;font-size:1.3rem;color:var(--accent)}
+.stat span{color:var(--muted);font-size:.85rem}
+h2{font-size:1.15rem;margin:28px 0 12px;font-weight:800;padding-inline-start:12px;border-inline-start:5px solid var(--accent);border-radius:3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.day{background:color-mix(in srgb,var(--card) 82%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:16px;padding:12px 10px;cursor:pointer;user-select:none;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.07);transition:transform .15s,box-shadow .15s}
+.day:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.14)}
+.day .w{color:var(--muted);font-size:.8rem}
+.day .d{font-size:1.5rem;font-weight:800;line-height:1.3}
+.day .n{font-size:.78rem;color:var(--muted)}
+.day.today{border:2px solid var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent),0 8px 20px rgba(0,0,0,.12)}
+.day.done{background:color-mix(in srgb,var(--done) 16%,var(--card));border-color:var(--done)}
+.day.done .d::after{content:" ✓";color:var(--done);font-size:1rem}
+.day.fri .w{color:var(--accent)}
+.hint{color:var(--muted);font-size:.85rem;margin-top:8px}
+.day .note{font-size:.78rem;margin-top:6px;padding-top:6px;border-top:1px dashed var(--line);min-height:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.day .note:empty{display:none}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));z-index:20}
+#modal.open{display:flex}
+.panel{background:var(--card);border-radius:18px;padding:16px;width:100%;max-width:380px;margin:auto}
+.story{position:relative;overflow:hidden;aspect-ratio:9/16;border-radius:20px;background:radial-gradient(1.4px 1.4px at 30px 40px,#fff,transparent),radial-gradient(1px 1px at 110px 90px,#fff,transparent),radial-gradient(1.6px 1.6px at 180px 150px,#ffe9a8,transparent),radial-gradient(1px 1px at 70px 200px,#bcd4ff,transparent),radial-gradient(ellipse at 25% 20%,hsl(var(--h1,260) 80% 45%/.55),transparent 55%),radial-gradient(ellipse at 80% 75%,hsl(var(--h2,320) 75% 45%/.5),transparent 55%),linear-gradient(180deg,#05061a,hsl(var(--h1,260) 50% 14%) 70%,hsl(var(--h2,320) 55% 18%));background-size:220px 260px,220px 260px,220px 260px,220px 260px,auto,auto,auto;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:6px}
+.story>*{position:relative;z-index:1}
+.story::before{content:"";position:absolute;width:54px;height:54px;border-radius:50%;top:22px;right:22px;background:radial-gradient(circle at 35% 35%,#fffbe6,#ffe8a3 60%,#e6c76a);box-shadow:0 0 28px 8px rgba(255,236,170,.45)}
+.story::after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;bottom:-180px;left:-90px;background:radial-gradient(circle at 35% 30%,hsl(var(--h2,320) 70% 55%),hsl(var(--h2,320) 60% 20%));box-shadow:0 0 40px 6px hsl(var(--h2,320) 80% 55%/.35)}
+.story .cw{opacity:.85;font-size:1.1rem}
+.story .cart{width:100%;height:170px}
+.story .cart svg{width:100%;height:100%}
+.story .cst{font-size:.95rem;font-weight:600;margin-bottom:6px}
+.story .cq{font-size:.88rem;opacity:.9;margin-top:8px;line-height:1.8}
+.story .cprog{width:80%;height:8px;border-radius:99px;background:rgba(255,255,255,.25);overflow:hidden;margin-top:10px}
+.story .cprog i{display:block;height:100%;background:#fff;border-radius:99px}
+.day{border-top:4px solid var(--c,var(--accent))}
+.story .cd{font-size:2.2rem;font-weight:800}
+.story .cn{font-size:1.1rem;background:rgba(255,255,255,.18);border-radius:99px;padding:4px 16px;margin:6px 0 16px}
+.story .cnote{font-size:1.15rem;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.story .cl{margin-top:auto;font-size:.85rem;opacity:.8}
+textarea{width:100%;margin-top:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text);font:inherit;padding:10px;min-height:90px;resize:vertical}
+.row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.row label{flex:1;min-width:120px}
+button{font:inherit;border:0;border-radius:10px;padding:8px 14px;background:var(--accent);color:#fff;cursor:pointer}
+button.alt{background:var(--line);color:var(--text)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>روزشمار تا نوروز ۱۴۰۶ 🌱</h1>
+  <p class="sub">از ۸ آبان تا ۲۹ اسفند ۱۴۰۵ — روی هر روز بزن تا انجام‌شده علامت بخوره</p>
+  <div class="bar"><i id="fill"></i></div>
+  <div class="stats">
+    <div class="stat"><b id="sToday">–</b><span>امروز روز چندمه</span></div>
+    <div class="stat"><b id="sLeft">–</b><span>روز مونده تا سال نو</span></div>
+    <div class="stat"><b id="sDone">۰</b><span>روز علامت‌خورده</span></div>
+  </div>
+  <div id="root"></div>
+  <p class="hint">امروز با کادر نارنجی مشخص می‌شود. روی هر روز بزن تا یادداشت بنویسی و کارت استوری‌اش را ببینی.</p>
+  <div id="modal"><div class="panel">
+    <div class="story" id="story"><div class="cw" id="cW"></div><div class="cd" id="cD"></div><div class="cn" id="cN"></div><div class="cart" id="cArt"></div><div class="cst" id="cStage"></div><div class="cnote" id="cNote"></div><div class="cprog"><i id="cBar"></i></div><div class="cl" id="cL"></div></div>
+    <textarea id="noteIn" placeholder="امروز چی کار کردی؟ مثلاً: سی‌شارپ + زبان تیم"></textarea>
+    <div class="row"><label><input type="checkbox" id="doneIn"> انجام شد ✓</label><button class="alt" id="copyBtn">کپی کپشن</button><button id="closeBtn">ذخیره</button></div>
+    <p class="hint">برای استوری از همین کارت اسکرین‌شات بگیر.</p>
+  </div></div>
+</div>
+<script>
+var TOTAL=142;
+var months=[["آبان",30,8],["آذر",30,1],["دی",30,1],["بهمن",30,1],["اسفند",29,1]];
+var wds=["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه"];
+function fa(n){return String(n).replace(/\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[d]});}
+var now=new Date();
+var off=Math.round((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-Date.UTC(2026,9,30))/864e5);
+var todayIdx=off+1;
+var saved={};
+try{saved=JSON.parse(localStorage.getItem("daycounter1405")||"{}");}catch(e){}
+var notes={};
+try{notes=JSON.parse(localStorage.getItem("daycounter1405notes")||"{}");}catch(e){}
+function save(){try{localStorage.setItem("daycounter1405",JSON.stringify(saved));localStorage.setItem("daycounter1405notes",JSON.stringify(notes));}catch(e){}}
+var root=document.getElementById("root");
+var stages=[["بذر","🌰"],["جوانه","🌱"],["نهال","🌿"],["ساقه‌ی قوی","🪴"],["درخت","🌳"],["شکوفه","🌸"]];
+function stg(i){var k=Math.min(5,Math.floor(i/TOTAL*6));return {n:stages[k][0],e:stages[k][1]};}
+function hue(i){return (i*47)%360;}
+var quotes=["امروز یک قدم کوچک، فردا یک عادت بزرگ.","رشد صدا ندارد، فقط ادامه دارد.","کمتر از دیروز نه، بیشتر از دیروز آره.","سخت بود؟ یعنی داری رشد می‌کنی.","هر روز یک آجر برای ساختن آینده.","ادامه بده؛ ریشه‌ها همیشه زیر زمین کار می‌کنند.","بهانه نیاور، خروجی بساز.","مهم نیست کجایی، مهم اینه که امروز تکون خوردی.","کد امروز، شغل فردا.","ثبات از استعداد قوی‌تره.","دیروزِ تو، پله‌ی امروزته.","آهسته ولی هر روز.","خسته‌ای؟ استراحت کن، ولی ول نکن.","یک درصد بهتر شدن، هر روز."];
+function plantSVG(i){var p=i/TOTAL,h=16+p*150,top=262-h,n=Math.max(1,Math.round(p*9)),s='';
+ s+='<ellipse cx="100" cy="264" rx="'+(40+p*40)+'" ry="8" fill="rgba(0,0,0,.28)"/>';
+ s+='<path d="M100 264 Q'+(100+Math.sin(i)*12)+' '+(264-h/2)+' 100 '+top+'" stroke="#fff" stroke-width="'+(3+p*5)+'" fill="none" stroke-linecap="round"/>';
+ for(var k=1;k<=n;k++){var y=264-(h*k/(n+1)),sd=k%2?1:-1,sz=7+p*12+(n-k)*0.6;s+='<ellipse cx="'+(100+sd*sz)+'" cy="'+y+'" rx="'+sz+'" ry="'+(sz*.45)+'" transform="rotate('+(sd*-25)+' 100 '+y+')" fill="#b2f2bb"/>';}
+ if(p>=.35){var r=12+(p-.35)*55,o3=[[-.7,.2],[.7,.2],[0,-.5]];o3.forEach(function(o){s+='<circle cx="'+(100+o[0]*r)+'" cy="'+(top+o[1]*r)+'" r="'+r+'" fill="#8ce99a" opacity=".92"/>';});
+  if(p>=.85){o3.concat([[.2,.5]]).forEach(function(o){s+='<circle cx="'+(100+o[0]*r*1.1)+'" cy="'+(top+o[1]*r*1.1)+'" r="5" fill="#ffd43b"/>';});}}
+ else{s+='<ellipse cx="100" cy="'+(top-4)+'" rx="'+(6+p*14)+'" ry="'+(3+p*8)+'" fill="#b2f2bb"/>';}
+ for(var q=0;q<7;q++){var a=(i*53+q*97)%200,b=(i*29+q*61)%120;s+='<circle cx="'+a+'" cy="'+b+'" r="'+(1+(q%3))+'" fill="#fff" opacity=".6"/>';}
+ return '<svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">'+s+'</svg>';}
+var idx=0,wd=6,info={};
+months.forEach(function(m){
+  var h=document.createElement("h2");h.textContent=m[0]+" ۱۴۰۵";root.appendChild(h);
+  var g=document.createElement("div");g.className="grid";root.appendChild(g);
+  for(var d=m[2];d<=m[1];d++){
+    idx++;
+    var el=document.createElement("div");
+    el.className="day"+(wd===6?" fri":"")+(idx===todayIdx?" today":"")+(saved[idx]?" done":"");
+    el.dataset.i=idx;info[idx]={w:wds[wd],d:d,m:m[0]};
+    el.style.setProperty("--c","hsl("+hue(idx)+" 85% 55%)");el.innerHTML='<div class="w">'+stg(idx).e+' '+wds[wd]+'</div><div class="d">'+fa(d)+' '+m[0]+'</div><div class="n">روز '+fa(idx)+' از '+fa(TOTAL)+'</div><div class="note"></div>';
+    el.querySelector(".note").textContent=notes[idx]||"";
+    el.onclick=function(){openDay(+this.dataset.i,this);};
+    g.appendChild(el);
+    wd=(wd+1)%7;
+  }
+});
+function stats(){
+  var t=Math.min(Math.max(todayIdx,0),TOTAL);
+  document.getElementById("sToday").textContent=todayIdx>=1&&todayIdx<=TOTAL?fa(todayIdx)+" از "+fa(TOTAL):"–";
+  document.getElementById("sLeft").textContent=todayIdx>=1&&todayIdx<=TOTAL?fa(TOTAL-todayIdx+1):"–";
+  document.getElementById("sDone").textContent=fa(Object.keys(saved).length);
+  document.getElementById("fill").style.width=(t/TOTAL*100)+"%";
+}
+stats();
+var modal=document.getElementById("modal"),ta=document.getElementById("noteIn"),chk=document.getElementById("doneIn"),cur=null,curEl=null;
+function render(){document.getElementById("cNote").textContent=ta.value||"یادداشت امروز…";}
+function openDay(i,el){cur=i;curEl=el;var f=info[i];
+  document.getElementById("cW").textContent=f.w;
+  document.getElementById("cD").textContent=fa(f.d)+" "+f.m+" ۱۴۰۵";
+  document.getElementById("cN").textContent="روز "+fa(i)+" از "+fa(TOTAL);
+  document.getElementById("cL").textContent=fa(TOTAL-i)+" روز تا نوروز ۱۴۰۶";
+  var f2=stg(i),hh=hue(i),st=document.getElementById("story");
+  st.style.setProperty("--h1",hh);st.style.setProperty("--h2",(hh+55)%360);
+  document.getElementById("cArt").innerHTML=plantSVG(i);
+  document.getElementById("cStage").textContent=f2.e+" مرحله: "+f2.n;
+  
+  document.getElementById("cBar").style.width=(i/TOTAL*100)+"%";
+  ta.value=notes[i]||"";chk.checked=!!saved[i];render();modal.classList.add("open");}
+function closeDay(){if(cur===null)return;var v=ta.value.trim();
+  if(v)notes[cur]=v;else delete notes[cur];
+  if(chk.checked)saved[cur]=1;else delete saved[cur];
+  curEl.classList.toggle("done",!!saved[cur]);
+  curEl.querySelector(".note").textContent=notes[cur]||"";
+  save();stats();modal.classList.remove("open");cur=null;}
+ta.oninput=render;
+document.getElementById("closeBtn").onclick=closeDay;
+modal.onclick=function(e){if(e.target===modal)closeDay();};
+document.getElementById("copyBtn").onclick=function(){var f=info[cur];var t="روز "+fa(cur)+" از "+fa(TOTAL)+" | "+f.w+" "+fa(f.d)+" "+f.m+"\n"+ta.value;try{navigator.clipboard.writeText(t);this.textContent="کپی شد ✓";var b=this;setTimeout(function(){b.textContent="کپی کپشن";},1500);}catch(e){}};
+</script>
+</body>
+</html>
